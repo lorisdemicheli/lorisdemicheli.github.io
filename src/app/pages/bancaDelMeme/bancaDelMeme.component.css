@@ -1,0 +1,28 @@
+.center{
+    position:relative;
+    width:100vw;
+    height: 100vh;
+    background-size:100% 100%;
+    background-image: url("https://www.sardegnaturismo.it/sites/default/files/galleria/012_quartu_sant_elena_1_rsz.jpg");
+  }
+  
+  .element{
+    position:absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+    width: 50vw; height: 40vh;
+  }
+  
+  /* just aesthetics */
+  body{
+    height: 100vh;
+    display:flex;
+    background: azure;
+  }
+
+  html *
+  {
+     font-size: 1em !important;
+     color: #fff !important;
+     font-family: Arial !important;
+  }
