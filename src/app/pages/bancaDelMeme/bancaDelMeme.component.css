@@ -1,4 +1,12 @@
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: flex;
+  clear: both;
+  flex-wrap: wrap;
 }

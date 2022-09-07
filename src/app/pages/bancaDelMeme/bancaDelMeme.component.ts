@@ -15,6 +15,12 @@ export class PageBancaDelMeme implements OnInit {
   }, {
     front: "davanti",
     back: "back"    
+  }, {
+    front: "bobo",
+    back: "back"    
+  }, {
+    front: "nana",
+    back: "back"    
   }]
 
   constructor() {}

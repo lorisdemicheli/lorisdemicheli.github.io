@@ -1,6 +1,6 @@
 
-<div class="cards" *ngFor="let item of items">
-    <card [onClickFlip]="false">
+<div class="column" *ngFor="let item of items">
+    <card class="row">
         <div front>
             <h1>{{item.front}}</h1>
         </div>

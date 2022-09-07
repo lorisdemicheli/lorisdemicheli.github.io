@@ -5,7 +5,8 @@ import {
     transition,
     trigger
 } from "@angular/animations";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+
 
 @Component({
     selector: 'card',
@@ -25,17 +26,13 @@ import { Component, Input, OnInit } from "@angular/core";
     ]
 })
 export class Card implements OnInit {
-
-    @Input()
-    onClickFlip: boolean = true;
-
-    flip: string = 'front';
+    constructor() { }
 
     ngOnInit() { }
 
+    flip: string = 'front';
+
     toggleFlip() {
-        if(this.onClickFlip) {
-            this.flip = (this.flip == 'front') ? 'back' : 'front';
-        }
+        this.flip = (this.flip == 'front') ? 'back' : 'front';
     }
 }
