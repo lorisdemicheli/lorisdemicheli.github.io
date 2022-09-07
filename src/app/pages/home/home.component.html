@@ -1,3 +1,26 @@
 <h1>{{pageName}}</h1>
 <button type="button" routerLink="/home">Home2</button>
 <button type="button" routerLink="/home/login">Login</button>
+<div>
+    <input-box id="user_id" 
+               name="User" 
+               placeholder="Inserisci user"
+               [required]="true">
+    </input-box>
+    <input-box id="pass_id" 
+               name="Password" 
+               placeholder="Inserisci password"  
+               [required]="true" 
+               type="password">
+    </input-box>
+</div>
+<div>
+    <listbox [model]="test">
+        <listhead>
+            <listheader name="User"></listheader>
+        </listhead>
+        <listitem>
+            <listcell></listcell>
+        </listitem>
+    </listbox>
+</div>

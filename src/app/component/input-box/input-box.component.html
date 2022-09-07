@@ -1,0 +1,12 @@
+<div class="input-container">
+  <input 
+    type="{{type}}"
+    id="{{id}}"
+    class="text-input"
+    autocomplete="off"
+    placeholder="{{placeholder}}"
+    (blur)="onBlur($event)"
+    [attr.required]="required"
+  />
+  <label class="label" for="{{id}}">{{name}}</label>
+</div>

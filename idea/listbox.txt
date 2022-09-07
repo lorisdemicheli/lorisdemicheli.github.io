@@ -1,0 +1,19 @@
+<!--<div class="listbox-container">
+  <table class="table table-striped">
+    <tr>
+      <th [ngIf]="numerated" scope="col">#</th>
+
+      <ng-content select="[head]"></ng-content>
+
+      <th scope="col" *ngFor="let header of headers">
+        {{header}}
+      </th>
+    </tr>
+    <tbody>
+      <tr *ngFor="let country of countries">
+      <!-- metto each dentro tr -->
+        <th scope="row">{{ country.id }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div> --!> 

@@ -10,6 +10,14 @@ export class PageHome implements OnInit {
   pageName: string = "home"
 
   endDate: string = "2022-08-28 7:45";
+
+  test:any[] = [{
+    casa: "casa",
+    nome: "pippo"
+  },{
+    casa: "mkia",
+    nome: "coca"
+  }];
   constructor() {}
   
 

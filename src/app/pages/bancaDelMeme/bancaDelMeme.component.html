@@ -1,3 +1,11 @@
-<div class="center">
-    <countdown class="element" countdownHead="Vacanza Del Meme" [end]="endDate"></countdown>
+
+<div class="cards" *ngFor="let item of items">
+    <card [onClickFlip]="false">
+        <div front>
+            <h1>{{item.front}}</h1>
+        </div>
+        <div back>
+            <h1>{{item.back}}</h1>
+        </div>
+    </card>
 </div>

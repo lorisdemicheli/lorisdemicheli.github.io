@@ -1,0 +1,6 @@
+<tbody>
+    <tr *ngFor="let obj of values">
+        <ng-content select="listcell"></ng-content>
+        <!--<ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{$each: obj}"></ng-template>-->
+    </tr>
+</tbody>
