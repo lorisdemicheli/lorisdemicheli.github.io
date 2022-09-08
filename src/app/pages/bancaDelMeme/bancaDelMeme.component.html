@@ -1,8 +1,8 @@
-
-<div class="column" *ngFor="let item of items">
-    <card class="row">
+<div class="mi-cards" >
+    <card class="mi-card" *ngFor="let item of items">
         <div front>
-            <h1>{{item.front}}</h1>
+            <img class="img-cont" src="{{item.img}}">
+            <div class="bottom-right"><h1>{{item.front}}</h1></div>
         </div>
         <div back>
             <h1>{{item.back}}</h1>

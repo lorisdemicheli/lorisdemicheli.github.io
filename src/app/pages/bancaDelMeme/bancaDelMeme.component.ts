@@ -11,7 +11,11 @@ export class PageBancaDelMeme implements OnInit {
   
   items: any[] = [{
     front: "ciao",
-    back: "dietro"
+    back: "dietro",
+    rarity: "",
+    title: "",
+    img:"https://i.redd.it/b3esnz5ra34y.jpg",
+    description: ""
   }, {
     front: "davanti",
     back: "back"    
