@@ -1,11 +1,12 @@
 <div class="mi-cards" >
-    <card class="mi-card" *ngFor="let item of items">
+    <card class="mi-card" backgroundFront="rgb(128,128,128,0.3)" [isFlippable]="false"></card>
+    <card class="mi-card" *ngFor="let item of items" backgroundFront="{{item.rarity}}">
         <div front>
+            <h1>{{item.username}}</h1>
             <img class="img-cont" src="{{item.img}}">
-            <div class="bottom-right"><h1>{{item.front}}</h1></div>
         </div>
         <div back>
-            <h1>{{item.back}}</h1>
+            <h2 class="description">{{item.description}}</h2>
         </div>
     </card>
 </div>

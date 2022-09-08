@@ -16,7 +16,6 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 40%;
-  border-radius: 10px;
   height: 400px;
 }
 
@@ -39,7 +38,11 @@
 }
 
 div>img {
-  border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 75%;
+  height: 344px;
+  border-radius: 0 0 10px 10px;
+}
+
+.description {
+  color: azure;
 }

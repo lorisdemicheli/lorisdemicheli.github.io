@@ -1,9 +1,9 @@
 <div class="card-single">
 	<div class="card-content" (click)="toggleFlip()" [@flipState]="flip">
-		<div class="front">
+		<div class="front" [ngStyle]="{'backgroundColor': backgroundFront}">
             <ng-content select="[front]"></ng-content>
 		</div>
-		<div class="back">
+		<div class="back" [ngStyle]="{'backgroundColor': backgroundBack}">
             <ng-content select="[back]"></ng-content>
 		</div>
 	</div>
