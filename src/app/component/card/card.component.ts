@@ -5,7 +5,7 @@ import {
     transition,
     trigger
 } from "@angular/animations";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 
 @Component({
@@ -33,6 +33,8 @@ export class Card implements OnInit {
     backgroundFront: string = "green";
     @Input()
     backgroundBack: string = "#23262d";
+    @Output()
+    clickCard = new EventEmitter();
 
     ngOnInit() { }
 
@@ -42,5 +44,6 @@ export class Card implements OnInit {
         if (this.isFlippable) {
             this.flip = (this.flip == 'front') ? 'back' : 'front';
         }
+        this.clickCard.emit();
     }
 }

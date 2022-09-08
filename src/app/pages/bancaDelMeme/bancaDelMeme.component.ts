@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Type } from '@angular/core';
+import { Router } from '@angular/router';
 import { CardInterface } from 'src/app/interface/CardInterface';
 
 @Component({
@@ -8,8 +9,6 @@ import { CardInterface } from 'src/app/interface/CardInterface';
 })
 //trasformazione in modulo cosi che il lazy load funziona
 export class PageBancaDelMeme implements OnInit {
-  endDate: string = "2022-08-28 7:45";
-
   items: CardInterface[] = [{
     rarity: "#DAA520",
     username: "Loris Demicheli",
@@ -22,13 +21,16 @@ export class PageBancaDelMeme implements OnInit {
     description: "Valerio un novese DOC con il vino"
   },{
     rarity: "#B87333",
-    username: "Carlo Alberto Treves",
+    username: "Carlo Treves",
     img: "https://i.redd.it/b3esnz5ra34y.jpg",
     description: "Carlo il popi-popi nazionale della banca del meme"
   }];
 
-  constructor() { }
-
+  constructor(private router: Router) { }
+  
+  addCard() {
+    this.router.navigate(['/home']);
+  }
 
   ngOnInit() { }
 }
