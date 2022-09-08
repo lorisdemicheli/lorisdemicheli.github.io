@@ -4,19 +4,35 @@ import { Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { FooterComp } from './component/footer/footer.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PageHome } from './pages/home/home.component';
 import { PageLogin } from './pages/login/login.component';
 import { PageNotFound } from './pages/pageNotFound/pageNotFound.component.';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Countdown } from './component/countdown/countdown.component';
 import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { InputBox } from './component/input-box/input-box.component';
+import { ListBox } from './component/listbox/listbox.component';
+import { ListHead } from './component/listhead/listhead.component';
+import { ListHeader } from './component/listheader/listheader.component';
+import { ListItem } from './component/listitem/listitem.component';
+import { ListCell } from './component/listcell/listcell.component';
+import { Otp } from './component/otp/otp.component';
 import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
+  FooterComp,
+  Countdown,
   InputBox,
+  ListBox,
+  ListHead,
+  ListHeader,
+  ListItem,
+  ListCell,
+  Otp,
   Card
 ];
 
