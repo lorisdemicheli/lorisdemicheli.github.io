@@ -1,2 +1,4 @@
 <qrcode qrdata="{{valueQr}}" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-<button (click)="loginWithGoogle()" mat-raised-button class="google-login-btn">Google</button>
+<div class="google-btn-div">
+    <asl-google-signin-button type="standard" size="large" shape="circle"> </asl-google-signin-button>
+</div>

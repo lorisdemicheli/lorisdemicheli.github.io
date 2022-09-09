@@ -15,7 +15,7 @@ import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { InputBox } from './component/input-box/input-box.component';
 import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 
 const component: (any[] | Type<any>)[] | undefined = [
@@ -43,6 +43,7 @@ const pages: (any[] | Type<any>)[] | undefined = [
     NgbModule,
     BrowserAnimationsModule,
     QRCodeModule,
+    SocialLoginModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
