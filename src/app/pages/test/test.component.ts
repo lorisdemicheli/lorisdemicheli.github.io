@@ -16,18 +16,13 @@ export class Test implements OnInit {
   ngOnInit() { 
     this._authService.authState.subscribe((user) => {
       this.user = user;
+      this.router.navigate(['meme']);
     });
   }
 
 
   constructor(private router: Router,
     private _authService: SocialAuthService) {
-  }
-
-  loginWithGoogle(): void {
-    this._authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(() => console.log("Logged in"))
-      .catch((err) => console.log(err));
   }
 }
 
