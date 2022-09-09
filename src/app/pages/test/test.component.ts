@@ -1,4 +1,4 @@
-import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit, Input, Type } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,17 +9,23 @@ import { Router } from '@angular/router';
 })
 export class Test implements OnInit {
 
-  valueQr: String = "loris.demi";
+  valueQr: String = "MIRTO";
 
-  ngOnInit() { }
+  user: SocialUser | undefined;
+
+  ngOnInit() { 
+    this._authService.authState.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
 
   constructor(private router: Router,
-    private socialAuthService: SocialAuthService) {
+    private _authService: SocialAuthService) {
   }
 
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    this._authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(() => this.router.navigate(['meme']));
   }
 }
