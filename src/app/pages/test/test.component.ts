@@ -26,7 +26,8 @@ export class Test implements OnInit {
 
   loginWithGoogle(): void {
     this._authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(() => console.log("Logged in"));
+      .then(() => console.log("Logged in"))
+      .catch((err) => console.log(err));
   }
 }
 
