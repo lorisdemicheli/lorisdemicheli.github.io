@@ -26,7 +26,7 @@ export class Test implements OnInit {
 
   loginWithGoogle(): void {
     this._authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(() => this.router.navigate(['meme']));
+      .then(() => console.log("Logged in"));
   }
 }
 
