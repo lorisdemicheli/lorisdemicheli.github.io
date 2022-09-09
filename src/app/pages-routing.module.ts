@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './auth-guard.service';
 import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { PageHome } from './pages/home/home.component';
 import { PageLogin } from './pages/login/login.component';
@@ -7,8 +8,9 @@ import { PageNotFound } from './pages/pageNotFound/pageNotFound.component.';
 import { Test } from './pages/test/test.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: 'meme', component: PageBancaDelMeme },
+  //{path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: '', component: Test, pathMatch: 'full' },
+  {path: 'meme', component: PageBancaDelMeme, canActivate: [AuthGuardService] },
   {path: 'home', component: PageHome },
   {path: 'home/login', component: PageLogin },
   {path: 'test', component: Test },
