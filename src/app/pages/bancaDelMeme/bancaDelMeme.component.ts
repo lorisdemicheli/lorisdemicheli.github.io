@@ -1,3 +1,4 @@
+import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component, OnInit, Input, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardInterface } from 'src/app/interface/CardInterface';
@@ -26,12 +27,18 @@ export class PageBancaDelMeme implements OnInit {
     description: "Carlo il popi-popi nazionale della banca del meme"
   }];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: SocialAuthService) { }
+  
+  refreshToken(): void {
+    this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
   
   addCard() {
     this.router.navigate(['/home']);
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.refreshToken();
+  }
 }
 
