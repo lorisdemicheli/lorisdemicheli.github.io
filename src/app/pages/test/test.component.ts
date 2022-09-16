@@ -16,6 +16,7 @@ export class Test implements OnInit {
   ngOnInit() { 
     this._authService.authState.subscribe((user) => {
       if(user){
+        console.log(user);
         this.user = user;
         this.router.navigate(['meme']);
       }     

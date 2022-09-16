@@ -13,7 +13,7 @@ export class PageBancaDelMeme implements OnInit {
   items: CardInterface[] = [{
     rarity: "#DAA520",
     username: "Loris Demicheli",
-    img: "https://i.redd.it/b3esnz5ra34y.jpg",
+    img: "https://ik.imagekit.io/3jaj7cxcaa/default-image.jpg",
     description: "Loris il programmatore del sito attuale"
   },{
     rarity: "#C0C0C0",
