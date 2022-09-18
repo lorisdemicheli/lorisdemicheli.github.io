@@ -1,9 +1,5 @@
+<navigation-bar></navigation-bar>
 <qrcode qrdata="{{valueQr}}" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
 <div class="google-btn-div">
     <asl-google-signin-button type="standard" size="large" shape="circle"> </asl-google-signin-button>
 </div>
-<div *ngIf="user" class="card-block">
-    <h4 class="card-title">{{ user.name }}</h4>
-    <p class="card-text">{{ user.email }}</p>
-    <p class="card-text">Logged in with {{ user.provider }}</p>
-  </div>

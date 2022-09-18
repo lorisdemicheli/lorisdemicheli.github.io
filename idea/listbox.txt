@@ -17,3 +17,72 @@
     </tbody>
   </table>
 </div> --!> 
+
+
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SocialUser } from '@abacritt/angularx-social-login';
+import { AuthInterface } from 'src/app/interface/AuthInterface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  private endpoint = "lorisdemicheli-backend.vercel.app/auth/";
+  private cookieName = "bdm";
+  private cookie: string;
+
+  constructor(private http: HttpClient) {
+    this.cookie = 'Bearer ' + localStorage.getItem(this.cookieName);
+  }
+
+  checkAuth(): Observable<HttpEvent<any>> {
+    const req = new HttpRequest('POST', this.endpoint + "verify", {
+      responseType: 'json',
+      Headers: this.header()
+    });
+    return this.http.request(req);
+  }
+
+  login(user: SocialUser): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('googleId', user.id);
+    const req = new HttpRequest('POST', this.endpoint + "verify", formData, {
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
+  loginPerform(user: SocialUser): void {
+    this.getConfig
+    this.login(user).subscribe((data: AuthInterface) => {
+      localStorage.setItem(this.cookieName,'Bearer ' + data.token);
+    });
+  }
+
+  getConfig() {
+    return this.http.get('');
+  }
+
+  register(user: SocialUser, birthdate: Date): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('username', user.name);
+    formData.append('googleId', user.id);
+    formData.append('imgUrl', user.photoUrl);
+    formData.append('birthdate', birthdate.toString());
+    const req = new HttpRequest('POST', this.endpoint + "register", formData, {
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
+  header(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: this.cookie
+    });
+  }
+}

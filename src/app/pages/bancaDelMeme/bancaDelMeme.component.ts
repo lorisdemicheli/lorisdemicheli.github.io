@@ -18,12 +18,12 @@ export class PageBancaDelMeme implements OnInit {
   },{
     rarity: "#C0C0C0",
     username: "Valerio Bovone",
-    img: "https://i.redd.it/b3esnz5ra34y.jpg",
+    img: "https://ik.imagekit.io/3jaj7cxcaa/upload/b3esnz5ra34y_1NueSvJR4.jpg",
     description: "Valerio un novese DOC con il vino"
   },{
     rarity: "#B87333",
     username: "Carlo Treves",
-    img: "https://i.redd.it/b3esnz5ra34y.jpg",
+    img: "https://ik.imagekit.io/3jaj7cxcaa/upload/b3esnz5ra34y_1NueSvJR4.jpg",
     description: "Carlo il popi-popi nazionale della banca del meme"
   }];
 

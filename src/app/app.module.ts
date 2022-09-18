@@ -17,11 +17,13 @@ import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
+import { NavigationBar } from './component/navigation-bar/navigation-barcomponent';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
   InputBox,
   Card,
+  NavigationBar,
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [
@@ -48,7 +50,7 @@ const pages: (any[] | Type<any>)[] | undefined = [
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
-      autoLogin: true,
+      autoLogin: false,
       providers: [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
