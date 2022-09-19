@@ -19,6 +19,7 @@ import { Card } from './component/card/card.component';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 import { NavigationBar } from './component/navigation-bar/navigation-bar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -46,7 +47,8 @@ const pages: (any[] | Type<any>)[] | undefined = [
     NgbModule,
     BrowserAnimationsModule,
     QRCodeModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
