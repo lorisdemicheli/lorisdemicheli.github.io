@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { CookieService } from 'ngx-cookie-service';
@@ -26,7 +26,9 @@ export class AuthService {
   login(user: SocialUser) {
     return this.http.post<AuthInterface>(this.endpoint + "login", {
       googleId: user.id
-    });
+    }).pipe(tap((auth: AuthInterface) => {
+      this.cookieService.set(AuthService.cookieName,auth.token);
+    }));
   }
 
   register(user: SocialUser, birthdate: Date) {

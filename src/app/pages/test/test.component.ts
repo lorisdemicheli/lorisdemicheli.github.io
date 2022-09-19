@@ -19,15 +19,9 @@ export class Test implements OnInit {
   ngOnInit() { 
     this.socialAuthService.authState.subscribe((user) => {
       if(user){
-        console.log(user);
-        this.authService.login(user).pipe( 
-          tap((auth: AuthInterface) => {
-            this.router.navigate(['home/'+auth.username]);
-          }),
-          catchError((error) => {
-            return of(error);
-          })
-        );
+        this.authService.login(user).subscribe((auth: AuthInterface) => {
+          this.router.navigate(['home/'+auth.username]);
+        });
       }     
     });
   }
