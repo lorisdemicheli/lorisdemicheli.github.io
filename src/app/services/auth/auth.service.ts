@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEvent, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
@@ -13,11 +13,13 @@ export class AuthService {
   private endpoint = "https://lorisdemicheli-backend.vercel.app/auth/";
   private cookieName = "bdm";
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {  }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   checkAuth() {
-    return this.http.post(this.endpoint + "verify",this.header(),{ 
-      observe: 'response' 
+    return this.http.post(this.endpoint + "verify", null, {
+      headers: {
+        'Authorization': 'Bearer ' + this.cookieService.get(this.cookieName)
+      }
     });
   }
 
@@ -29,7 +31,7 @@ export class AuthService {
 
   loginPerform(user: SocialUser) {
     this.login(user).subscribe((data) => {
-      this.cookieService.set(this.cookieName, data.token,10);
+      this.cookieService.set(this.cookieName, data.token, 10);
     });
   }
 
@@ -39,22 +41,19 @@ export class AuthService {
       googleId: user.id,
       imgUrl: user.photoUrl,
       birthdate: birthdate
-    },{ observe: 'response' });
+    }, { observe: 'response' });
   }
 
   header() {
-    if(this.cookieService.check(this.cookieName)) {
+    if (this.cookieService.check(this.cookieName)) {
       return {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-        })
+        headers: {
+          'Authorization': 'Bearer ' + this.cookieService.get(this.cookieName)
+        }
       }
     } else {
       return {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          Authorization: 'Bearer ' +  this.cookieService.get(this.cookieName)
-        })
+        headers: {  }
       }
     }
   }
