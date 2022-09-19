@@ -20,12 +20,14 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
 import { AuthGuardService } from './auth-guard.service';
 import { NavigationBar } from './component/navigation-bar/navigation-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoaderBox } from './component/loader-box/loader-box.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
   InputBox,
   Card,
-  NavigationBar
+  NavigationBar,
+  LoaderBox
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [

@@ -11,17 +11,17 @@ import { CardInterface } from 'src/app/interface/CardInterface';
 //trasformazione in modulo cosi che il lazy load funziona
 export class PageBancaDelMeme implements OnInit {
   items: CardInterface[] = [{
-    rarity: "#DAA520",
+    colorCode: "#DAA520",
     username: "Loris Demicheli",
     img: "https://ik.imagekit.io/3jaj7cxcaa/default-image.jpg",
     description: "Loris il programmatore del sito attuale"
   },{
-    rarity: "#C0C0C0",
+    colorCode: "#C0C0C0",
     username: "Valerio Bovone",
     img: "https://ik.imagekit.io/3jaj7cxcaa/upload/b3esnz5ra34y_1NueSvJR4.jpg",
     description: "Valerio un novese DOC con il vino"
   },{
-    rarity: "#B87333",
+    colorCode: "#B87333",
     username: "Carlo Treves",
     img: "https://ik.imagekit.io/3jaj7cxcaa/upload/b3esnz5ra34y_1NueSvJR4.jpg",
     description: "Carlo il popi-popi nazionale della banca del meme"

@@ -1,6 +1,7 @@
 export interface CardInterface {
-    rarity: String;
     username: String;
     img: String;
-    description: String;
+    birthdate?: String;
+    colorCode: String;
+    description?: String;
 }

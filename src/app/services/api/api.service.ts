@@ -4,37 +4,28 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { CookieService } from 'ngx-cookie-service';
+import { CardInterface } from 'src/app/interface/CardInterface';
+import { QrCodeInterface } from 'src/app/interface/QrCodeInterface';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class ApiService {
 
-  private endpoint = "https://lorisdemicheli-backend.vercel.app/auth/";
-  static cookieName = "bdm";
+  private endpoint = "http://localhost:3000/";
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  checkAuth() {
-    return this.http.post(this.endpoint + "verify", null, {
+  cards(username: string) {
+    return this.http.get<CardInterface[]>(this.endpoint + "user/" + username + "/match");
+  }
+
+  qrcode() {
+    return this.http.post<QrCodeInterface>(this.endpoint + "qr/generate",null,{
       headers: {
         'Authorization': 'Bearer ' + this.cookieService.get(AuthService.cookieName)
       }
     });
-  }
-
-  login(user: SocialUser) {
-    return this.http.post<AuthInterface>(this.endpoint + "login", {
-      googleId: user.id
-    });
-  }
-
-  register(user: SocialUser, birthdate: Date) {
-    return this.http.post(this.endpoint + "register", {
-      username: user.name,
-      googleId: user.id,
-      imgUrl: user.photoUrl,
-      birthdate: birthdate
-    }, { observe: 'response' });
   }
 }

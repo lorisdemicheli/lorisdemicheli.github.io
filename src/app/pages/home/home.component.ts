@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, Type } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CardInterface } from 'src/app/interface/CardInterface';
+import { QrCodeInterface } from 'src/app/interface/QrCodeInterface';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'page-home',
@@ -7,20 +12,36 @@ import { Component, OnInit, Input, Type } from '@angular/core';
 })
 //trasformazione in modulo cosi che il lazy load funziona
 export class PageHome implements OnInit {
-  pageName: string = "home"
+  items?: CardInterface[];
+  code?: QrCodeInterface;
 
-  endDate: string = "2022-08-28 7:45";
+  private lastLoadNumber?: Number;
 
-  test:any[] = [{
-    casa: "casa",
-    nome: "pippo"
-  },{
-    casa: "mkia",
-    nome: "coca"
-  }];
-  constructor() {}
-  
+  constructor(private api: ApiService, private route: ActivatedRoute, private modalService: NgbModal) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.api.cards(params["username"]).subscribe((cards: CardInterface[]) => {
+        this.items = cards;
+        this.lastLoadNumber = cards.length;
+      });
+    });
+  }
+
+  open(content: any) {
+    this.modalService.open(content).result.then((result) => { },
+      (reason) => {
+        this.code = undefined;
+      }
+    );
+    this.api.qrcode().subscribe((code: QrCodeInterface) => {
+      this.code = code;
+    });
+  }
+
+  //TODO
+  loadOnScroll() {
+
+  }
 }
 

@@ -11,7 +11,7 @@ const routes: Routes = [
   //{path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: '', component: Test, pathMatch: 'full' },
   {path: 'meme', component: PageBancaDelMeme, canActivate: [AuthGuardService] },
-  {path: 'home', component: PageHome },
+  {path: 'home/:username', component: PageHome, canActivate: [AuthGuardService] },
   {path: 'home/login', component: PageLogin },
   {path: 'test', component: Test },
   {path: '404', component: PageNotFound },

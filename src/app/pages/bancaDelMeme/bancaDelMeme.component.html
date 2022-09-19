@@ -4,7 +4,7 @@
             <h1 class="add-card">+</h1>
         </div>
     </card>
-    <card class="mi-card" *ngFor="let item of items" backgroundFront="{{item.rarity}}">
+    <card class="mi-card" *ngFor="let item of items" backgroundFront="{{item.colorCode}}">
         <div front>
             <h1>{{item.username}}</h1>
             <img class="img-cont" src="{{item.img}}">

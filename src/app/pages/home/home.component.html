@@ -1,16 +1,28 @@
-<h1>{{pageName}}</h1>
-<button type="button" routerLink="/home">Home2</button>
-<button type="button" routerLink="/home/login">Login</button>
-<div>
-    <input-box id="user_id" 
-               name="User" 
-               placeholder="Inserisci user"
-               [required]="true">
-    </input-box>
-    <input-box id="pass_id" 
-               name="Password" 
-               placeholder="Inserisci password"  
-               [required]="true" 
-               type="password">
-    </input-box>
+<div class="mi-cards">
+    <card class="mi-card" backgroundFront="rgb(128,128,128,0.3)" [isFlippable]="false" (click)="open(content)">
+        <div class="cart-add-content" front>
+            <h1 class="add-card">+</h1>
+        </div>
+    </card>
+    <card class="mi-card" *ngFor="let item of items" backgroundFront="{{item.colorCode}}">
+        <div front>
+            <h1>{{item.username}}</h1>
+            <img class="img-cont" src="{{item.img}}">
+        </div>
+        <div back>
+            <h1 class="description">{{item.username}}</h1>
+            <h2 class="description">{{item.description}}</h2>
+        </div>
+    </card>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">QR Match</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body container">
+        <loader-box *ngIf="code == null"></loader-box>
+        <qrcode *ngIf="code != null" qrdata="{{code}}" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+</ng-template>
