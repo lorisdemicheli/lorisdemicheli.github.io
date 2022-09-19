@@ -2,6 +2,7 @@ import { NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 
 import { QRCodeModule } from 'angularx-qrcode';
 
@@ -17,13 +18,13 @@ import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
-import { NavigationBar } from './component/navigation-bar/navigation-barcomponent';
+import { NavigationBar } from './component/navigation-bar/navigation-bar.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
   InputBox,
   Card,
-  NavigationBar,
+  NavigationBar
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [
@@ -59,7 +60,7 @@ const pages: (any[] | Type<any>)[] | undefined = [
       ]
     }
   },
-    AuthGuardService],
+    AuthGuardService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

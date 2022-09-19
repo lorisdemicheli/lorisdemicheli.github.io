@@ -1,6 +1,7 @@
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit, Input, Type } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'test',
@@ -14,18 +15,18 @@ export class Test implements OnInit {
   user: SocialUser | undefined;
 
   ngOnInit() { 
-    this._authService.authState.subscribe((user) => {
+    this.socialAuthService.authState.subscribe((user) => {
       if(user){
         console.log(user);
-        this.user = user;
-        this.router.navigate(['meme']);
+        this.authService.loginPerform(user);
       }     
     });
   }
 
 
   constructor(private router: Router,
-    private _authService: SocialAuthService) {
+    private socialAuthService: SocialAuthService,
+    private authService: AuthService) {
   }
 }
 

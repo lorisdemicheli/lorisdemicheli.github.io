@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest, HttpEvent, HttpHeaders} from '@angular/common/
 import { Observable } from 'rxjs';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private endpoint = "lorisdemicheli-backend.vercel.app/auth/";
   private cookieName = "bdm";
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient, private cookieService: CookieService) {  }
 
   checkAuth() {
     return this.http.post(this.endpoint + "verify",this.header(),{ 
@@ -28,7 +29,7 @@ export class AuthService {
 
   loginPerform(user: SocialUser) {
     this.login(user).subscribe((data) => {
-      localStorage.setItem(this.cookieName, data.token);
+      this.cookieService.set(this.cookieName, data.token,10);
     });
   }
 
@@ -42,12 +43,19 @@ export class AuthService {
   }
 
   header() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        Authorization: 'Bearer ' +  localStorage.getItem(this.cookieName)
-      })
-    };
-    
+    if(this.cookieService.check(this.cookieName)) {
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+        })
+      }
+    } else {
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'Bearer ' +  this.cookieService.get(this.cookieName)
+        })
+      }
+    }
   }
 }
