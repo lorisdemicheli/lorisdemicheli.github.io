@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  private endpoint = "lorisdemicheli-backend.vercel.app/auth/";
+  private endpoint = "https://lorisdemicheli-backend.vercel.app/auth/";
   private cookieName = "bdm";
 
   constructor(private http: HttpClient, private cookieService: CookieService) {  }
