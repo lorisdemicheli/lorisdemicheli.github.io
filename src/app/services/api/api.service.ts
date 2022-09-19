@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ApiService {
 
-  private endpoint = "http://localhost:3000/";
+  private endpoint = "https://lorisdemicheli-backend.vercel.app/";
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
