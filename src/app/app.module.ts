@@ -21,6 +21,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { NavigationBar } from './component/navigation-bar/navigation-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderBox } from './component/loader-box/loader-box.component';
+import { PageMatch } from './pages/match/match.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -32,6 +33,7 @@ const component: (any[] | Type<any>)[] | undefined = [
 
 const pages: (any[] | Type<any>)[] | undefined = [
   PageHome,
+  PageMatch,
   PageLogin,
   PageNotFound,
   PageBancaDelMeme,

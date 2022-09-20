@@ -7,18 +7,21 @@ import { CookieService } from 'ngx-cookie-service';
 import { CardInterface } from 'src/app/interface/CardInterface';
 import { QrCodeInterface } from 'src/app/interface/QrCodeInterface';
 import { AuthService } from '../auth/auth.service';
+import { GenericResposeInterface } from 'src/app/interface/GenericResponseInterface';
+import { CardsInterface } from 'src/app/interface/CardsInterface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private endpoint = "https://lorisdemicheli-backend.vercel.app/";
+  private endpoint = environment.apiUrl;
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   cards(username: string) {
-    return this.http.get<CardInterface[]>(this.endpoint + "user/" + username + "/match");
+    return this.http.get<CardsInterface>(this.endpoint + "user/" + username + "/match");
   }
 
   qrcode() {
@@ -26,6 +29,14 @@ export class ApiService {
       headers: {
         'Authorization': 'Bearer ' + this.cookieService.get(AuthService.cookieName)
       }
+    });
+  }
+
+  qrmatch(code: string) {
+    return this.http.post<GenericResposeInterface>(this.endpoint + "qr/" + code,null,{
+      headers: {
+        'Authorization': 'Bearer ' + this.cookieService.get(AuthService.cookieName)
+      },
     });
   }
 }

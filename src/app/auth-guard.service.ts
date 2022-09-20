@@ -1,9 +1,8 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { GenericResposeInterface } from './interface/GenericResponseInterface';
 import { AuthService } from './services/auth/auth.service';
 
 @Injectable({
@@ -15,8 +14,9 @@ export class AuthGuardService implements CanActivate {
     private authService: AuthService) {
   }
 
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.checkAuth().pipe( 
+    return this.authService.checkAuth().pipe(
       map(() => {
         return true;
       }),

@@ -14,13 +14,12 @@ export class Test implements OnInit {
 
   valueQr: String = "MIRTO";
 
-  user: SocialUser | undefined;
 
   ngOnInit() { 
     this.socialAuthService.authState.subscribe((user) => {
       if(user){
         this.authService.login(user).subscribe((auth: AuthInterface) => {
-          this.router.navigate(['home/'+auth.username]);
+          this.router.navigate(['user/'+auth.username]);
         });
       }     
     });

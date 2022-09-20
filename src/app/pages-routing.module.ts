@@ -4,6 +4,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { PageHome } from './pages/home/home.component';
 import { PageLogin } from './pages/login/login.component';
+import { PageMatch } from './pages/match/match.component';
 import { PageNotFound } from './pages/pageNotFound/pageNotFound.component.';
 import { Test } from './pages/test/test.component';
 
@@ -11,7 +12,8 @@ const routes: Routes = [
   //{path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: '', component: Test, pathMatch: 'full' },
   {path: 'meme', component: PageBancaDelMeme, canActivate: [AuthGuardService] },
-  {path: 'home/:username', component: PageHome, canActivate: [AuthGuardService] },
+  {path: 'user/:username', component: PageHome, canActivate: [AuthGuardService] },
+  {path: 'match/:code', component: PageMatch, canActivate: [AuthGuardService] },
   {path: 'home/login', component: PageLogin },
   {path: 'test', component: Test },
   {path: '404', component: PageNotFound },

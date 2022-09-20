@@ -186,6 +186,9 @@ THE SOFTWARE.
 encode-utf8
 MIT
 
+ngx-cookie-service
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
