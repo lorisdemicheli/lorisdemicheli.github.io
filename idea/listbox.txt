@@ -86,3 +86,8 @@ export class AuthService {
     });
   }
 }
+
+
+
+
+document.getElementsByTagName('asl-google-signin-button')[0].children[0].children[0].children[0].click()

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { GenericResposeInterface } from 'src/app/interface/GenericResponseInterface';
 import { ApiService } from 'src/app/services/api/api.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'page-match',
@@ -10,18 +12,27 @@ import { ApiService } from 'src/app/services/api/api.service';
 })
 export class PageMatch implements OnInit {
 
+  login: boolean = false;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService) {
+    private api: ApiService,
+    private auth: AuthService) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.api.qrmatch(params["code"]).subscribe((res: GenericResposeInterface) => {
-        if (res.status == 200) {
-          this.router.navigate(['/']);
-        }
-      })
+    this.auth.checkAuth().subscribe((resAuth: AuthInterface) => {
+      if (!resAuth.error) {
+        this.route.params.subscribe((params) => {
+          this.api.qrmatch(params["code"]).subscribe((res: GenericResposeInterface) => {
+            if (res.status == 200) {
+              this.router.navigate(['/user/'+resAuth.username]);
+            }
+          });
+        });
+      } else {
+        this.login = true;
+      }
     });
   }
 }

@@ -1,5 +1,17 @@
-<navigation-bar></navigation-bar>
-<qrcode qrdata="{{valueQr}}" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-<div class="google-btn-div">
-    <asl-google-signin-button type="standard" size="large" shape="circle"> </asl-google-signin-button>
+<h1 *ngIf="!name">
+    Ciao
+</h1>
+<h1 *ngIf="name">
+    Ciao, {{name}}
+</h1>
+
+<button class="btn btn-default" (click)="login()">
+    Login
+</button>
+<button class="btn btn-default" (click)="logoff()">
+    Logout
+</button>
+
+<div>
+    Username/Passwort zum Testen: max/geheim
 </div>

@@ -1,3 +1,5 @@
 .google-btn-div {
   max-width: 200px;
+  visibility: hidden;
+  position: absolute;
 }

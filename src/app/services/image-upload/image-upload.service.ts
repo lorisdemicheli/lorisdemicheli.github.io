@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEvent} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const httpHeader = {
-  
-}
+import { environment } from '../../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploadService {
 
-  private endpoint = "lorisdemicheli-backend.vercel.app/user/image/add";
+  private endpoint = environment.apiUrl + "user/image/";
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   upload(image: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append('image', image);
 
-    const req = new HttpRequest('POST', this.endpoint, formData, {
+    const req = new HttpRequest('POST', this.endpoint + "add", formData, {
       reportProgress: false,
       responseType: 'json'
     });
@@ -28,9 +28,14 @@ export class ImageUploadService {
   }
 
 
-  upload2(image: File): Observable<any> {
-    return this.http.put(this.endpoint,{ 
-      image: image
-    },);
+  upload2(image: File,imageName: string) {
+    return this.http.put(this.endpoint, {
+      image: image,
+      imageName: imageName
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + this.cookieService.get(AuthService.cookieName)
+      }
+    });
   }
 }

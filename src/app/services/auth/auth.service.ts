@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<AuthInterface>(this.endpoint + "login", {
       googleId: user.id
     }).pipe(tap((auth: AuthInterface) => {
-      this.cookieService.set(AuthService.cookieName,auth.token);
+      this.cookieService.set(AuthService.cookieName,auth.token,10);
     }));
   }
 

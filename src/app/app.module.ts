@@ -22,13 +22,14 @@ import { NavigationBar } from './component/navigation-bar/navigation-bar.compone
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderBox } from './component/loader-box/loader-box.component';
 import { PageMatch } from './pages/match/match.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
   InputBox,
   Card,
   NavigationBar,
-  LoaderBox
+  LoaderBox,
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [
@@ -52,7 +53,8 @@ const pages: (any[] | Type<any>)[] | undefined = [
     BrowserAnimationsModule,
     QRCodeModule,
     SocialLoginModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

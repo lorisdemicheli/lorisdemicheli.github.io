@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', component: Test, pathMatch: 'full' },
   {path: 'meme', component: PageBancaDelMeme, canActivate: [AuthGuardService] },
   {path: 'user/:username', component: PageHome, canActivate: [AuthGuardService] },
-  {path: 'match/:code', component: PageMatch, canActivate: [AuthGuardService] },
+  {path: 'match/:code', component: PageMatch },
   {path: 'home/login', component: PageLogin },
   {path: 'test', component: Test },
   {path: '404', component: PageNotFound },
