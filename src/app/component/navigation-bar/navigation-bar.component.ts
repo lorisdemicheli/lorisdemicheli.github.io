@@ -1,4 +1,10 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { AuthInterface } from 'src/app/interface/AuthInterface';
+import { User } from 'src/app/interface/User';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'navigation-bar',
@@ -6,27 +12,44 @@ import { Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./navigation-bar.component.css']
 })
 export class NavigationBar implements OnInit {
+
+  faBars = faBars;
+  faTimes = faTimes;
+  faSearch = faSearch;
+
+  constructor(private oauthService: OAuthService,
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) {
+
+  }
   ngOnInit(): void {
-    
+
   }
 
-  @Input()
-  type: string = "text";
-  @Input()
-  placeholder: string = "Input box";
-  @Input()
-  name: string = "Name box";
-  @Input()
-  id: string = "id-box";
-  @Input()
-  required: boolean = false;
-  
+  public login() {
+    this.oauthService.initLoginFlow();
+  }
 
-  onBlur(event: any){
-    if(event.target.value != ""){
-      event.target.nextElementSibling.classList.add("filled");
-    } else {
-      event.target.nextElementSibling.classList.remove("filled");
+  public logout() {
+    this.auth.logOut();
+  }
+
+  public isLoggedIn() {
+    let user: User = this.oauthService.getIdentityClaims() as User;
+    if (user != null) {
+      this.auth.loginOrRegister(user)
     }
+    return user != null;
+  }
+
+  public home() {
+    console.log("resAuth")
+    this.auth.checkAuth().subscribe((resAuth: AuthInterface) => {
+      console.log(resAuth)
+      this.route.params.subscribe((params) => {
+        this.router.navigate(['/user/' + resAuth.username]);
+      });
+    });
   }
 }

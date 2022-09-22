@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
-import { SocialUser } from '@abacritt/angularx-social-login';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { CookieService } from 'ngx-cookie-service';
 import { CardInterface } from 'src/app/interface/CardInterface';

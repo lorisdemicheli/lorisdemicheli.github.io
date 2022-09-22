@@ -16,13 +16,13 @@ import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { InputBox } from './component/input-box/input-box.component';
 import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 import { NavigationBar } from './component/navigation-bar/navigation-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderBox } from './component/loader-box/loader-box.component';
 import { PageMatch } from './pages/match/match.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -52,23 +52,14 @@ const pages: (any[] | Type<any>)[] | undefined = [
     NgbModule,
     BrowserAnimationsModule,
     QRCodeModule,
-    SocialLoginModule,
     HttpClientModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    FontAwesomeModule
   ],
-  providers: [{
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider('1079479956590-clfr0i2v0bd5aa38ns76bcijdmpnrjfq.apps.googleusercontent.com')
-        }
-      ]
-    }
-  },
-    AuthGuardService,CookieService],
+  providers: [
+    AuthGuardService,
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

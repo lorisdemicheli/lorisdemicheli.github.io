@@ -1,0 +1,21 @@
+<input type="checkbox" id="check">
+<nav>
+    <div class="icon">Banca Del Meme</div>
+    <div class="search_box">
+        <input type="search" placeholder="Search user">
+        <fa-icon [icon]="faSearch"></fa-icon>
+    </div>
+    <ol>
+        <li><a (click)="home()">Home</a></li>
+<!--        <li><a href="#">Home</a></li>
+        <li><a href="#">Home</a></li> -->
+        <li><a *ngIf="!isLoggedIn()" (click)="login()">Login</a>
+            <a *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
+        </li>
+        
+    </ol>
+    <label for="check" class="bar">
+        <fa-icon id="bars" [icon]="faBars"></fa-icon>
+        <fa-icon id="times" [icon]="faTimes"></fa-icon>
+    </label>
+</nav>
