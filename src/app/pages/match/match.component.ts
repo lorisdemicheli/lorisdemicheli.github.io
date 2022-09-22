@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { GenericResposeInterface } from 'src/app/interface/GenericResponseInterface';
 import { ApiService } from 'src/app/services/api/api.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { GoogleApiService } from 'src/app/services/api/google-api.service';
 
 @Component({
   selector: 'page-match',
@@ -17,11 +17,11 @@ export class PageMatch implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
-    private auth: AuthService) {
+    private googleAuth: GoogleApiService) {
   }
 
   ngOnInit() {
-    this.auth.checkAuth().subscribe((resAuth: AuthInterface) => {
+    this.googleAuth.checkAuth().subscribe((resAuth: AuthInterface) => {
       if (!resAuth.error) {
         this.route.params.subscribe((params) => {
           this.api.qrmatch(params["code"]).subscribe((res: GenericResposeInterface) => {

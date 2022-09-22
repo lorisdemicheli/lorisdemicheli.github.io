@@ -6,7 +6,7 @@ import { CardInterface } from 'src/app/interface/CardInterface';
 import { CardsInterface } from 'src/app/interface/CardsInterface';
 import { QrCodeInterface } from 'src/app/interface/QrCodeInterface';
 import { ApiService } from 'src/app/services/api/api.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { GoogleApiService } from 'src/app/services/api/google-api.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -24,12 +24,12 @@ export class PageHome implements OnInit {
 
   constructor(private api: ApiService,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private googleAuth: GoogleApiService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.authService.checkAuth().subscribe((auth: AuthInterface) => {
+      this.googleAuth.checkAuth().subscribe((auth: AuthInterface) => {
         if (params["username"] == auth.username) {
           this.ownership = true;
         }
