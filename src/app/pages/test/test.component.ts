@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { User } from 'src/app/interface/User';
+import { GoogleUser } from 'src/app/interface/GoogleUser';
 
 @Component({
   templateUrl: './test.component.html',
@@ -20,7 +20,7 @@ export class Test {
   }
 
   public get name() {
-    let claims = this.oauthService.getIdentityClaims() as User;
+    let claims = this.oauthService.getIdentityClaims() as GoogleUser;
     //console.log(claims)
     if (!claims) return null;
     return claims.name;

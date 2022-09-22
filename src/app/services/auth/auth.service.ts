@@ -6,7 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { GenericResposeInterface } from 'src/app/interface/GenericResponseInterface';
 import { environment } from '../../../environments/environment';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { User } from 'src/app/interface/User';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -30,7 +29,7 @@ export class AuthService {
     });
   }
 
-  login(user: User) {
+  /*login() {
     this.http.post<AuthInterface>(this.endpoint + "login", {
       googleId: user.sub
     }).subscribe((res: AuthInterface) => {
@@ -38,7 +37,7 @@ export class AuthService {
     })
   }
 
-  loginOrRegister(user: User) {
+  loginOrRegister() {
     if (!this.cookieService.check(AuthService.cookieName)) {
       this.http.post<AuthInterface>(this.endpoint + "login", {
         googleId: user.sub
@@ -60,7 +59,7 @@ export class AuthService {
   }
 
   logOut() {
-    this.cookieService.delete(AuthService.cookieName);
+    //this.cookieService.delete(AuthService.cookieName);
     this.oauthService.logOut();
     this.router.navigate(['/']);
   }

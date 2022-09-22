@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
-import { User } from 'src/app/interface/User';
+import { GoogleApiService } from 'src/app/services/api/google-api.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -20,33 +20,29 @@ export class NavigationBar implements OnInit {
   constructor(private oauthService: OAuthService,
     private auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private google: GoogleApiService) {
 
   }
+
   ngOnInit(): void {
 
   }
 
   public login() {
-    this.oauthService.initLoginFlow();
+    this.google.login()
   }
 
   public logout() {
-    this.auth.logOut();
+    this.google.logout();
   }
 
   public isLoggedIn() {
-    let user: User = this.oauthService.getIdentityClaims() as User;
-    if (user != null) {
-      this.auth.loginOrRegister(user)
-    }
-    return user != null;
+    return this.google.isLoggedIn();
   }
 
   public home() {
-    console.log("resAuth")
     this.auth.checkAuth().subscribe((resAuth: AuthInterface) => {
-      console.log(resAuth)
       this.route.params.subscribe((params) => {
         this.router.navigate(['/user/' + resAuth.username]);
       });
