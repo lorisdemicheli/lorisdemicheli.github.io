@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
 import { CookieService } from "ngx-cookie-service";
-import { catchError, throwError } from "rxjs";
+import { catchError, of, throwError } from "rxjs";
 import { AuthInterface } from "src/app/interface/AuthInterface";
 import { GoogleUser } from "src/app/interface/GoogleUser";
 import { environment } from '../../../environments/environment';
@@ -35,7 +35,7 @@ export class GoogleApiService {
             this.oAuthService.tryLoginImplicitFlow().then(() => {
                 if (this.oAuthService.hasValidAccessToken()) {
                     this.oAuthService.loadUserProfile().then((user) => {
-                        this.loginbackend(((user as any).info as GoogleUser));
+                        this.loginBackend(((user as any).info as GoogleUser));
                     });
                 }
             });
@@ -52,7 +52,7 @@ export class GoogleApiService {
         this.router.navigate(['/']);
     }
 
-    loginbackend(user: GoogleUser) {
+    loginBackend(user: GoogleUser) {
         if (!this.cookieService.check(GoogleApiService.cookieName)) {
             this.http.post<AuthInterface>(this.endpoint + "login", {
                 googleId: user.sub
@@ -63,10 +63,10 @@ export class GoogleApiService {
                     imgUrl: user.picture,
                     birthdate: user.birthday
                 }).subscribe((resReg: AuthInterface) => {
-                    this.loginbackend(user);
+                    this.loginBackend(user);
                 });
-                return throwError(err);
-              })).subscribe((resLog: AuthInterface) => {
+                return of();
+            })).subscribe((resLog: AuthInterface) => {
                 this.cookieService.set(GoogleApiService.cookieName, resLog.token, 10);
             });
         }
@@ -76,11 +76,15 @@ export class GoogleApiService {
         return this.cookieService.check(GoogleApiService.cookieName);
     }
 
+    headers() {
+        return {
+            headers: {
+                'Authorization': 'Bearer ' + this.cookieService.get(GoogleApiService.cookieName)
+            },
+        }
+    }
+
     checkAuth() {
-        return this.http.post<AuthInterface>(this.endpoint + "verify", null, {
-          headers: {
-            'Authorization': 'Bearer ' + this.cookieService.get(GoogleApiService.cookieName)
-          }
-        });
-      }
+        return this.http.post<AuthInterface>(this.endpoint + "verify", null, this.headers());
+    }
 }

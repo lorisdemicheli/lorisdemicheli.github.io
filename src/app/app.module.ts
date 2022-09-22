@@ -9,10 +9,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { AppComponent } from './app.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PageHome } from './pages/home/home.component';
-import { PageLogin } from './pages/login/login.component';
 import { PageNotFound } from './pages/pageNotFound/pageNotFound.component.';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PageBancaDelMeme } from './pages/bancaDelMeme/bancaDelMeme.component';
 import { InputBox } from './component/input-box/input-box.component';
 import { Test } from './pages/test/test.component';
 import { Card } from './component/card/card.component';
@@ -23,6 +21,7 @@ import { LoaderBox } from './component/loader-box/loader-box.component';
 import { PageMatch } from './pages/match/match.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PageUser } from './pages/user/user.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -34,10 +33,9 @@ const component: (any[] | Type<any>)[] | undefined = [
 
 const pages: (any[] | Type<any>)[] | undefined = [
   PageHome,
+  PageUser,
   PageMatch,
-  PageLogin,
   PageNotFound,
-  PageBancaDelMeme,
   Test
 ];
 
