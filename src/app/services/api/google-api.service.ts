@@ -35,7 +35,7 @@ export class GoogleApiService {
             this.oAuthService.tryLoginImplicitFlow().then(() => {
                 if (this.oAuthService.hasValidAccessToken()) {
                     this.oAuthService.loadUserProfile().then((user) => {
-                        this.loginBackend(((user as any).info as GoogleUser));
+                        this.loginOrRegisterBackend(((user as any).info as GoogleUser));
                     });
                 }
             });
@@ -52,7 +52,7 @@ export class GoogleApiService {
         this.router.navigate(['/']);
     }
 
-    loginBackend(user: GoogleUser) {
+    loginOrRegisterBackend(user: GoogleUser) {
         if (!this.cookieService.check(GoogleApiService.cookieName)) {
             this.http.post<AuthInterface>(this.endpoint + "login", {
                 googleId: user.sub
@@ -63,7 +63,7 @@ export class GoogleApiService {
                     imgUrl: user.picture,
                     birthdate: user.birthday
                 }).subscribe((resReg: AuthInterface) => {
-                    this.loginBackend(user);
+                    this.loginOrRegisterBackend(user);
                 });
                 return of();
             })).subscribe((resLog: AuthInterface) => {

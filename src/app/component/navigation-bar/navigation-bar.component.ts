@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { OAuthService } from 'angular-oauth2-oidc';
@@ -15,6 +15,8 @@ export class NavigationBar implements OnInit {
   faBars = faBars;
   faTimes = faTimes;
   faSearch = faSearch;
+  @ViewChild('inputSearch') 
+  inputSearch?:ElementRef;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -38,11 +40,21 @@ export class NavigationBar implements OnInit {
     return this.google.isLoggedIn();
   }
 
-  public home() {
+  public userProfile() {
     this.google.checkAuth().subscribe((resAuth: AuthInterface) => {
       this.route.params.subscribe((params) => {
         this.router.navigate(['/user/' + resAuth.username]);
       });
     });
+  }
+
+  public home() {
+    this.router.navigate(['/']);
+  }
+
+  public search() {
+    if(this.inputSearch?.nativeElement.value){
+      this.router.navigate(['/user/' + this.inputSearch.nativeElement.value]);
+    }
   }
 }

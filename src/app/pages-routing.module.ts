@@ -9,7 +9,7 @@ import { PageUser } from './pages/user/user.component';
 
 const routes: Routes = [
   //{path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: '', component: Test, pathMatch: 'full' },
+  {path: '', component: PageHome, pathMatch: 'full' },
   {path: 'user/:username', component: PageUser, canActivate: [AuthGuardService] },
   {path: 'match/:code', component: PageMatch },
   {path: 'test', component: Test },

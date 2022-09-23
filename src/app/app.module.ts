@@ -22,6 +22,7 @@ import { PageMatch } from './pages/match/match.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageUser } from './pages/user/user.component';
+import { ToastsContainer } from './component/toast/toasts-container.component';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -29,6 +30,7 @@ const component: (any[] | Type<any>)[] | undefined = [
   Card,
   NavigationBar,
   LoaderBox,
+  ToastsContainer
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [
