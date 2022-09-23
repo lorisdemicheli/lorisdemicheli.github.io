@@ -11,7 +11,7 @@ const routes: Routes = [
   //{path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: '', component: PageHome, pathMatch: 'full' },
   {path: 'user/:username', component: PageUser, canActivate: [AuthGuardService] },
-  {path: 'match/:code', component: PageMatch },
+  {path: 'match/:code', component: PageMatch, canActivate: [AuthGuardService] },
   {path: 'test', component: Test },
   {path: '**', component: PageNotFound },
   //{path: '**', loadChildren: () => { import('').then(m=>m.class)} },

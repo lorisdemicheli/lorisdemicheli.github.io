@@ -54,7 +54,7 @@ export class NavigationBar implements OnInit {
 
   public search() {
     if(this.inputSearch?.nativeElement.value){
-      this.router.navigate(['/user/' + this.inputSearch.nativeElement.value]);
+      this.router.navigateByUrl('/user/' + this.inputSearch.nativeElement.value);
     }
   }
 }

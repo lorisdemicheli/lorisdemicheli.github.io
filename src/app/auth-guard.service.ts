@@ -14,13 +14,18 @@ export class AuthGuardService implements CanActivate {
   }
 
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree{
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.googleAuth.checkAuth().pipe(
       map(() => {
         return true;
       }),
       catchError(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/'], {
+          state: {
+            type: 'error',
+            text: 'Devi essere loggato'
+          }
+        });
         return of(false);
       })
     );
