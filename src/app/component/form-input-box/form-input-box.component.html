@@ -1,0 +1,20 @@
+<div class="form-group" [ngClass]="{'error': form && form.controls[id] && form.controls[id].invalid && (form.controls[id].dirty || form.controls[id].touched)}">
+  <label for="{{id}}">{{title}}</label>
+  <input id="{{id}}" 
+         name="{{title}}" 
+         class="form-control" 
+         (change)="change(input.value)" 
+         (blur)="touch(input.value)"
+         #input>
+  <!-- (keydown)="change(input.value)"  -->
+  <ng-container *ngIf="form && form.controls[id] && form.controls[id].invalid && (form.controls[id].dirty || form.controls[id].touched)">
+    <ng-container *ngFor="let error of errors![id]">
+      <div *ngIf="form && form.controls[id] && form.controls[id].errors && form.controls[id].errors![error.condition]" 
+           class="error-message">
+             {{error.errorDescription}}
+      </div>
+    </ng-container>
+  </ng-container >
+</div>
+
+<!-- form && form.controls[id] && form.controls[id].errors && form.controls[id].errors[error.condition] -->

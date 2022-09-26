@@ -17,33 +17,10 @@ export class PageMatch implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService,
-    private googleAuth: GoogleApiService) {
+    private api: ApiService) {
   }
 
   ngOnInit() {
-    this.googleAuth.checkAuth().subscribe((resAuth: AuthInterface) => {
-      if (!resAuth.error) {
-        this.route.params.subscribe((params) => {
-          this.api.qrmatch(params["code"]).subscribe((res: GenericResposeInterface) => {
-            if (res.status == 200) {
-              this.router.navigate(['/'], {
-                state: {
-                  type: 'success',
-                  text: 'Match avvenuto con successo'
-                }
-              });
-            }
-          });
-        });
-      } else {
-        this.login = true;
-      }
-    });
-  }
-
-
-  check2() {
     this.route.params.subscribe((params) => {
       this.api.qrmatch(params["code"])
         .pipe(catchError(err => {

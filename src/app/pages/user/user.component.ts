@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { tap } from 'rxjs';
 import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { CardInterface } from 'src/app/interface/CardInterface';
 import { CardsInterface } from 'src/app/interface/CardsInterface';
@@ -16,25 +17,30 @@ import { environment } from '../../../environments/environment';
 })
 //trasformazione in modulo cosi che il lazy load funziona
 export class PageUser implements OnInit {
-  items?: CardInterface[];
+  items?: CardInterface[] = undefined;
   code?: string;
-  ownership: boolean = false;
+  ownership?: boolean = false;
 
   private lastLoadNumber?: Number;
 
   constructor(private api: ApiService,
     private route: ActivatedRoute,
     private googleAuth: GoogleApiService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.googleAuth.checkAuth().subscribe((auth: AuthInterface) => {
+      this.googleAuth.checkAuth().pipe(tap(() => {
+        this.ownership = false;
+      })).subscribe((auth: AuthInterface) => {
         if (params["username"] == auth.username) {
           this.ownership = true;
         }
       })
-      this.api.cards(params["username"]).subscribe((cards: CardsInterface) => {
+      this.api.cards(params["username"]).pipe(tap(() => {
+        this.items = undefined;
+      })).subscribe((cards: CardsInterface) => {
         this.items = cards.cards;
         this.lastLoadNumber = cards.cards.length;
       });

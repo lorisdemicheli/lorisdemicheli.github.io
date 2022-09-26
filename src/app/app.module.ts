@@ -23,6 +23,9 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageUser } from './pages/user/user.component';
 import { ToastsContainer } from './component/toast/toasts-container.component';
+import { PageRegister } from './pages/register/register.component';
+import { FormInputBox } from './component/form-input-box/form-input-box.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const component: (any[] | Type<any>)[] | undefined = [
   AppComponent,
@@ -30,7 +33,8 @@ const component: (any[] | Type<any>)[] | undefined = [
   Card,
   NavigationBar,
   LoaderBox,
-  ToastsContainer
+  ToastsContainer,
+  FormInputBox
 ];
 
 const pages: (any[] | Type<any>)[] | undefined = [
@@ -38,7 +42,8 @@ const pages: (any[] | Type<any>)[] | undefined = [
   PageUser,
   PageMatch,
   PageNotFound,
-  Test
+  Test,
+  PageRegister
 ];
 
 @NgModule({
@@ -54,7 +59,9 @@ const pages: (any[] | Type<any>)[] | undefined = [
     QRCodeModule,
     HttpClientModule,
     OAuthModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthGuardService,
