@@ -1,46 +1,40 @@
 .form-group {
-    color: #333;
-    float: left;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    line-height: 20px;
-    margin: 0 20px 10px;
-    width: 200px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
 }
 
 .form-group label {
+    color: #777;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 .form-group input {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 13px;
-    height: 33px;
-    margin: 0;
-    padding: 0 0 0 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
     width: 100%;
+    padding: 10px;
+    font-size: 14px;
 }
 
-.form-group .error-message {
-    color: #cc0033;
-    display: inline-block;
-    font-size: 12px;
-    line-height: 15px;
-    margin: 5px 0 0;
+.form-group input:focus {
+    outline: 0;
+    border-color: #777;
 }
 
-
-/* Error Styling */
-
-.error label {
-    color: #cc0033;
+.form-group.error input {
+    border-color: #e74c3c;
 }
 
-.error input {
-    background-color: #fce4e4;
-    border: 1px solid #cc0033;
-    outline: none;
+.form-group.error label {
+    color: #e74c3c;
+}
+
+.form-group small {
+    color: #e74c3c;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }

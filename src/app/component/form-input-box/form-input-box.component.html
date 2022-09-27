@@ -6,14 +6,14 @@
          class="form-control" 
          (change)="onChangeCallback(input.value)" 
          (blur)="onTouchedCallback()"
+         [readonly]="readonly"
          #input>
   <!-- (keydown)="change(input.value)"  -->
   <ng-container *ngIf="form.controls[formControlName].invalid && (form.controls[formControlName].dirty || form.controls[formControlName].touched)">
     <ng-container *ngFor="let error of errors[formControlName]">
-      <div *ngIf="form.controls[formControlName].errors![error.condition]" 
-           class="error-message">
+      <small *ngIf="form.controls[formControlName].errors![error.condition]">
              {{error.errorDescription}}
-      </div>
+      </small>
     </ng-container>
   </ng-container >
 </div>

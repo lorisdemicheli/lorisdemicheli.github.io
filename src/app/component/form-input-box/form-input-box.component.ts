@@ -17,6 +17,7 @@ export const CUSTOMINPUT_VALUE_ACCESSOR: any = {
 })
 export class FormInputBox implements OnInit, ControlValueAccessor {
   @Input() type: string = "text";
+  @Input() readonly: boolean = false;
   @Input() title!: string;
   @Input() formControlName!: string;
   @Input() form!: FormGroup<any>;
