@@ -2,12 +2,12 @@ import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { tap } from 'rxjs';
-import { AuthInterface } from 'src/app/interface/AuthInterface';
-import { CardInterface } from 'src/app/interface/CardInterface';
-import { CardsInterface } from 'src/app/interface/CardsInterface';
-import { QrCodeInterface } from 'src/app/interface/QrCodeInterface';
+import { Card } from 'src/app/interface/Card';
 import { ApiService } from 'src/app/services/api/api.service';
 import { GoogleApiService } from 'src/app/services/api/google-api.service';
+import { AuthResponse } from 'src/app/services/response/AuthResponse';
+import { CardsResponse } from 'src/app/services/response/CardsResponse';
+import { QrCodeResponse } from 'src/app/services/response/QrCodeResponse';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 })
 //trasformazione in modulo cosi che il lazy load funziona
 export class PageUser implements OnInit {
-  items?: CardInterface[] = undefined;
+  items?: Card[] = undefined;
   code?: string;
   ownership?: boolean = false;
 
@@ -33,14 +33,14 @@ export class PageUser implements OnInit {
     this.route.params.subscribe((params) => {
       this.googleAuth.checkAuth().pipe(tap(() => {
         this.ownership = false;
-      })).subscribe((auth: AuthInterface) => {
+      })).subscribe((auth: AuthResponse) => {
         if (params["username"] == auth.username) {
           this.ownership = true;
         }
       })
       this.api.cards(params["username"]).pipe(tap(() => {
         this.items = undefined;
-      })).subscribe((cards: CardsInterface) => {
+      })).subscribe((cards: CardsResponse) => {
         this.items = cards.cards;
         this.lastLoadNumber = cards.cards.length;
       });
@@ -53,7 +53,7 @@ export class PageUser implements OnInit {
         this.code = undefined;
       }
     );
-    this.api.qrcode().subscribe((res: QrCodeInterface) => {
+    this.api.qrcode().subscribe((res: QrCodeResponse) => {
       this.code = environment.siteUrl + "match/" + res.code;
     });
   }

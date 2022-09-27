@@ -1,7 +1,7 @@
 <div class="register-form">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <form-input-box formControlName="firstname" id="firstname" title="First Name" [errors]="errors" [form]="form"></form-input-box>
-    <form-input-box formControlName="username" id="username" title="Username" [errors]="errors" [form]="form"></form-input-box>
+    <form-input-box formControlName="firstname" title="First Name" [errors]="errors" [form]="form"></form-input-box>
+    <form-input-box formControlName="username" title="Username" [errors]="errors" [form]="form"></form-input-box>
     <button type="submit">submit</button>
   </form>
 </div>

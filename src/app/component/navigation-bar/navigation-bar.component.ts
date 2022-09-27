@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { AuthInterface } from 'src/app/interface/AuthInterface';
 import { GoogleApiService } from 'src/app/services/api/google-api.service';
+import { AuthResponse } from 'src/app/services/response/AuthResponse';
 
 @Component({
   selector: 'navigation-bar',
@@ -41,7 +40,7 @@ export class NavigationBar implements OnInit {
   }
 
   public userProfile() {
-    this.google.checkAuth().subscribe((resAuth: AuthInterface) => {
+    this.google.checkAuth().subscribe((resAuth: AuthResponse) => {
       this.route.params.subscribe((params) => {
         this.router.navigate(['/user/' + resAuth.username]);
       });

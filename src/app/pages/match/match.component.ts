@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
-import { AuthInterface } from 'src/app/interface/AuthInterface';
-import { GenericResposeInterface } from 'src/app/interface/GenericResponseInterface';
 import { ApiService } from 'src/app/services/api/api.service';
-import { GoogleApiService } from 'src/app/services/api/google-api.service';
+import { GenericRespose } from 'src/app/services/response/GenericResponse';
 
 @Component({
   selector: 'page-match',
@@ -32,7 +30,7 @@ export class PageMatch implements OnInit {
           });
           return of()
         }))
-        .subscribe((res: GenericResposeInterface) => {
+        .subscribe((res: GenericRespose) => {
           this.router.navigate(['/'], {
             state: {
               type: 'success',

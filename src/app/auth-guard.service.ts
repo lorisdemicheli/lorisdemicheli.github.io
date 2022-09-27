@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { GenericResposeInterface } from './interface/GenericResponseInterface';
 import { GoogleApiService } from './services/api/google-api.service';
 
 @Injectable({

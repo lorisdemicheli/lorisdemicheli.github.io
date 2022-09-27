@@ -1,15 +1,16 @@
-<div class="form-group" [ngClass]="{'error': form && form.controls[id] && form.controls[id].invalid && (form.controls[id].dirty || form.controls[id].touched)}">
-  <label for="{{id}}">{{title}}</label>
-  <input id="{{id}}" 
+<div class="form-group" [ngClass]="{'error': form.controls[formControlName].invalid && (form.controls[formControlName].dirty || form.controls[formControlName].touched)}">
+  <label for="{{formControlName}}">{{title}}</label>
+  <input id="{{formControlName}}" 
+         type="{{type}}"
          name="{{title}}" 
          class="form-control" 
-         (change)="change(input.value)" 
-         (blur)="touch(input.value)"
+         (change)="onChangeCallback(input.value)" 
+         (blur)="onTouchedCallback()"
          #input>
   <!-- (keydown)="change(input.value)"  -->
-  <ng-container *ngIf="form && form.controls[id] && form.controls[id].invalid && (form.controls[id].dirty || form.controls[id].touched)">
-    <ng-container *ngFor="let error of errors![id]">
-      <div *ngIf="form && form.controls[id] && form.controls[id].errors && form.controls[id].errors![error.condition]" 
+  <ng-container *ngIf="form.controls[formControlName].invalid && (form.controls[formControlName].dirty || form.controls[formControlName].touched)">
+    <ng-container *ngFor="let error of errors[formControlName]">
+      <div *ngIf="form.controls[formControlName].errors![error.condition]" 
            class="error-message">
              {{error.errorDescription}}
       </div>

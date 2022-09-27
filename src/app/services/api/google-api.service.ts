@@ -4,9 +4,9 @@ import { Router } from "@angular/router";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
 import { CookieService } from "ngx-cookie-service";
 import { catchError, of, throwError } from "rxjs";
-import { AuthInterface } from "src/app/interface/AuthInterface";
 import { GoogleUser } from "src/app/interface/GoogleUser";
 import { environment } from '../../../environments/environment';
+import { AuthResponse } from "../response/AuthResponse";
 
 
 const authConfig: AuthConfig = {
@@ -54,19 +54,19 @@ export class GoogleApiService {
 
     loginOrRegisterBackend(user: GoogleUser) {
         if (!this.cookieService.check(GoogleApiService.cookieName)) {
-            this.http.post<AuthInterface>(this.endpoint + "login", {
+            this.http.post<AuthResponse>(this.endpoint + "login", {
                 googleId: user.sub
             }).pipe(catchError(err => {
-                this.http.post<AuthInterface>(this.endpoint + "register", {
+                this.http.post<AuthResponse>(this.endpoint + "register", {
                     username: user.name,
                     googleId: user.sub,
                     imgUrl: user.picture,
                     birthdate: user.birthday
-                }).subscribe((resReg: AuthInterface) => {
+                }).subscribe((resReg: AuthResponse) => {
                     this.loginOrRegisterBackend(user);
                 });
                 return of();
-            })).subscribe((resLog: AuthInterface) => {
+            })).subscribe((resLog: AuthResponse) => {
                 this.cookieService.set(GoogleApiService.cookieName, resLog.token, 10);
             });
         }
@@ -85,6 +85,6 @@ export class GoogleApiService {
     }
 
     checkAuth() {
-        return this.http.post<AuthInterface>(this.endpoint + "verify", null, this.headers());
+        return this.http.post<AuthResponse>(this.endpoint + "verify", null, this.headers());
     }
 }
